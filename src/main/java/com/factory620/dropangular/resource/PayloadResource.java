@@ -6,6 +6,9 @@ import com.yammer.metrics.annotation.Timed;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * User: johneo
@@ -14,10 +17,12 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("/payload")
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PayloadResource {
 
     private final PayloadDao dao;
+    private final AtomicLong seq = new AtomicLong();
 
     public PayloadResource(PayloadDao dao) {
         this.dao = dao;
@@ -25,9 +30,11 @@ public class PayloadResource {
 
     @POST
     @Timed
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Payload p) {
+    public Response create(Payload p) {
+        p.setId(seq.getAndDecrement());
         dao.insert(p);
+        return Response.created(UriBuilder.fromResource(PayloadResource.class)
+                .build(p.getId())).build();
     }
 
     @GET
