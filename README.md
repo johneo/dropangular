@@ -1,0 +1,4 @@
+dropangular
+===========
+
+Dropwizard + AngularJS skeleton
