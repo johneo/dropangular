@@ -25,6 +25,7 @@ public class PayloadResource {
 
     @POST
     @Timed
+    @Consumes(MediaType.APPLICATION_JSON)
     public void create(Payload p) {
         dao.insert(p);
     }
@@ -32,6 +33,7 @@ public class PayloadResource {
     @GET
     @Timed
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Payload find(@PathParam("id") long id) {
         return dao.findById(id);
     }
