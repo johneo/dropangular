@@ -6,6 +6,7 @@ import com.yammer.dropwizard.db.DatabaseConfiguration;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * User: johneo
@@ -19,8 +20,8 @@ public class DropangularConfiguration extends Configuration {
     private String property;
 
     @Valid
-    @NotEmpty
-    @JsonProperty
+    @NotNull
+    @JsonProperty("database")
     private DatabaseConfiguration databaseConfiguration = new DatabaseConfiguration();
 
     public String getProperty() {

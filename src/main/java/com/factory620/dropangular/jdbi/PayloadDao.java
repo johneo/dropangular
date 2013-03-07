@@ -32,6 +32,6 @@ public interface PayloadDao {
     @SqlUpdate("create table payload (id int primary key, aValue varchar(1000))")
     void createTable();
 
-    @SqlUpdate("drop table payload")
+    @SqlUpdate("drop table if exists payload")
     void dropTable();
 }
