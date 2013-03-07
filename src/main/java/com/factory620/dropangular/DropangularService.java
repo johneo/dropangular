@@ -3,6 +3,7 @@ package com.factory620.dropangular;
 import com.factory620.dropangular.jdbi.PayloadDao;
 import com.factory620.dropangular.resource.PayloadResource;
 import com.yammer.dropwizard.Service;
+import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.jdbi.DBIFactory;
@@ -22,6 +23,7 @@ public class DropangularService extends Service<DropangularConfiguration> {
     @Override
     public void initialize(Bootstrap<DropangularConfiguration> bootstrap) {
         bootstrap.setName("dropangular");
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
     }
 
     @Override
